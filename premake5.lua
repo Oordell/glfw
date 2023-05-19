@@ -1,13 +1,12 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
-	staticruntime "off"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	files
-	{
+	files {
 		"include/GLFW/glfw3.h",
 		"include/GLFW/glfw3native.h",
 		"src/glfw_config.h",
@@ -31,12 +30,11 @@ project "GLFW"
 	}
 
 	filter "system:linux"
-		pic "On"
+		pic "on"
 
 		systemversion "latest"
 		
-		files
-		{
+		files {
 			"src/x11_init.c",
 			"src/x11_monitor.c",
 			"src/x11_window.c",
@@ -50,16 +48,14 @@ project "GLFW"
 			"src/linux_joystick.c"
 		}
 
-		defines
-		{
+		defines {
 			"_GLFW_X11"
 		}
 
 	filter "system:macosx"
-		pic "On"
+		pic "on"
 
-		files
-		{
+		files {
 			"src/cocoa_init.m",
 			"src/cocoa_monitor.m",
 			"src/cocoa_window.m",
@@ -72,16 +68,14 @@ project "GLFW"
 			"src/egl_context.c"
 		}
 
-		defines
-		{
+		defines {
 			"_GLFW_COCOA"
 		}
 
 	filter "system:windows"
 		systemversion "latest"
 
-		files
-		{
+		files {
 			"src/win32_init.c",
 			"src/win32_joystick.c",
 			"src/win32_module.c",
@@ -94,8 +88,7 @@ project "GLFW"
 			"src/osmesa_context.c"
 		}
 
-		defines 
-		{ 
+		defines { 
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
@@ -108,7 +101,3 @@ project "GLFW"
 		runtime "Release"
 		optimize "on"
 
-	filter "configurations:Dist"
-		runtime "Release"
-		optimize "on"
-        symbols "off"
